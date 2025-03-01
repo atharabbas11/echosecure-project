@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+.pinned-messages-bar {
+    position: sticky;
+    top: 0;
+    z-index: 10; /* Ensure the pinned messages bar is above the chat messages */
+    background-color: white; /* Match the background color of the chat */
+  }
+  
+  .pinned-message {
+    padding: 8px;
+    border-left: 4px solid transparent; /* Default border */
+    transition: border-color 0.2s ease;
+  }
+  
+  .pinned-message:hover {
+    background-color: #f9f9f9; /* Add hover effect */
+  }
+  
+  .pinned-message.border-green-500 {
+    border-left-color: #10b981; /* Green border for active message */
+  }
+  
+  .pinned-message.border-gray-300 {
+    border-left-color: #d1d5db; /* Grey border for inactive messages */
+  }
+  
+  .chat-messages {
+    margin-top: 8px; /* Add spacing between pinned messages bar and chat messages */
+  }
+
+
+
+
+
+
+
