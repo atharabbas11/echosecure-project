@@ -58,7 +58,7 @@ export const useAuthStore = create((set, get) => ({
         // No refresh token found, do not log out, just return false
         return false;
       }
-      const res = await axiosInstance.post("/auth/refresh-token");
+      // const res = await axiosInstance.post("/auth/refresh-token");
       toast.success("Token refreshed successfully");
       return true; // Indicate success
     } catch (error) {
