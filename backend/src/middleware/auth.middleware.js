@@ -125,30 +125,20 @@ export const verifyRefreshToken = async (req, res, next) => {
 
 export const validateCSRFToken = async (req, res, next) => {
   try {
-    // Log incoming headers and cookies for debugging
-    console.log("Request Headers:", req.headers);
-    console.log("Request Cookies:", req.cookies);
-
-    // Extract CSRF token and session ID
-    const csrfToken = req.headers['x-csrf-token'];
+    // Extract session ID
     const sessionId = req.cookies.sessionId;
 
-    console.log("CSRF Token from Header:", csrfToken);
-    console.log("Session ID from Cookie:", sessionId);
-
-
-    // Check if CSRF token and session ID are present
-    if (!csrfToken || !sessionId) {
-      console.error("Missing CSRF token or session ID");
-      return res.status(401).json({ message: 'Unauthorized - No CSRF token or session provided' });
+    // Check if session ID is present
+    if (!sessionId) {
+      console.error("Missing session ID");
+      return res.status(401).json({ message: 'Unauthorized - No session provided' });
     }
 
-    // Verify CSRF token against the session
-    const session = await SessionUser.findOne({ sessionId, csrfToken });
-    console.log("Session from Database:", session);
+    // Verify session
+    const session = await SessionUser.findOne({ sessionId });
     if (!session) {
-      console.error("Invalid CSRF token or session ID");
-      return res.status(401).json({ message: 'Unauthorized - Invalid CSRF token or session' });
+      console.error("Invalid session ID");
+      return res.status(401).json({ message: 'Unauthorized - Invalid session' });
     }
 
     // Attach the session to the request object for later use
