@@ -101,23 +101,63 @@ export const verifyRefreshToken = async (req, res, next) => {
   }
 };
 
+// export const validateCSRFToken = async (req, res, next) => {
+//   try {
+//     const csrfToken = req.headers['x-csrf-token'];
+//     const sessionId = req.cookies.sessionId;
+
+//     if (!csrfToken || !sessionId) {
+//       return res.status(401).json({ message: 'Unauthorized - No CSRF token or session provided' });
+//     }
+
+//     // Verify CSRF token
+//     const session = await SessionUser.findOne({ sessionId, csrfToken });
+//     if (!session) {
+//       return res.status(401).json({ message: 'Unauthorized - Invalid CSRF token' });
+//     }
+
+//     next();
+//   } catch (error) {
+//     res.status(500).json({ message: 'Internal server error' });
+//   }
+// };
+
+
 export const validateCSRFToken = async (req, res, next) => {
   try {
+    // Log incoming headers and cookies for debugging
+    console.log("Request Headers:", req.headers);
+    console.log("Request Cookies:", req.cookies);
+
+    // Extract CSRF token and session ID
     const csrfToken = req.headers['x-csrf-token'];
     const sessionId = req.cookies.sessionId;
 
+    console.log("CSRF Token from Header:", csrfToken);
+    console.log("Session ID from Cookie:", sessionId);
+
+
+    // Check if CSRF token and session ID are present
     if (!csrfToken || !sessionId) {
+      console.error("Missing CSRF token or session ID");
       return res.status(401).json({ message: 'Unauthorized - No CSRF token or session provided' });
     }
 
-    // Verify CSRF token
+    // Verify CSRF token against the session
     const session = await SessionUser.findOne({ sessionId, csrfToken });
+    console.log("Session from Database:", session);
     if (!session) {
-      return res.status(401).json({ message: 'Unauthorized - Invalid CSRF token' });
+      console.error("Invalid CSRF token or session ID");
+      return res.status(401).json({ message: 'Unauthorized - Invalid CSRF token or session' });
     }
 
+    // Attach the session to the request object for later use
+    req.session = session;
+
+    // Proceed to the next middleware or route handler
     next();
   } catch (error) {
+    console.error("Error in validateCSRFToken middleware:", error);
     res.status(500).json({ message: 'Internal server error' });
   }
 };
