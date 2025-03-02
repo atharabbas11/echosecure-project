@@ -56,7 +56,7 @@ export const verifyOTPAndLogin = async (req, res) => {
     // Generate tokens and session
     const sessionId = crypto.randomBytes(16).toString('hex');
     const csrfToken = generateCSRFToken();
-    const accessToken = generateToken(user._id, '1m', process.env.JWT_SECRET);
+    const accessToken = generateToken(user._id, '1d', process.env.JWT_SECRET);
     const refreshToken = generateToken(user._id, '7d', process.env.JWT_REFRESH_SECRET);
 
     // Store session in the database
