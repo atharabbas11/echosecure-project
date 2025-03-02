@@ -28,11 +28,11 @@ export const setCookies = (res, tokens) => {
     httpOnly: true,
     secure: true,
     sameSite: 'None',
-    maxAge: 1 * 60 * 1000, // 1 hour
+    maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
   });
 
   res.cookie('refreshToken', refreshToken, {
-    // httpOnly: true,
+    httpOnly: true,
     secure: true,
     sameSite: 'None',
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
@@ -46,7 +46,7 @@ export const setCookies = (res, tokens) => {
   });
 
   res.cookie('csrfToken', csrfToken, {
-    // httpOnly: true,
+    httpOnly: true,
     secure: true,
     sameSite: 'None',
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
