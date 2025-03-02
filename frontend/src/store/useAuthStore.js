@@ -126,10 +126,10 @@ export const useAuthStore = create((set, get) => ({
       await axiosInstance.post("/auth/logout");
   
       // Manually clear cookies as a fallback
-      document.cookie = "accessToken=; Path=/; Domain=echosecure-backend.onrender.com; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure; SameSite=None; HttpOnly";
-      document.cookie = "refreshToken=; Path=/; Domain=echosecure-backend.onrender.com; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure; SameSite=None; HttpOnly";
-      document.cookie = "sessionId=; Path=/; Domain=echosecure-backend.onrender.com; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure; SameSite=None; HttpOnly";
-      document.cookie = "csrfToken=; Path=/; Domain=echosecure-backend.onrender.com; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure; SameSite=None; HttpOnly";
+      document.cookie = "accessToken=; Path=/; Domain=.onrender.com; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure; SameSite=None; HttpOnly";
+      document.cookie = "refreshToken=; Path=/; Domain=.onrender.com; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure; SameSite=None; HttpOnly";
+      document.cookie = "sessionId=; Path=/; Domain=.onrender.com; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure; SameSite=None; HttpOnly";
+      document.cookie = "csrfToken=; Path=/; Domain=.onrender.com; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure; SameSite=None; HttpOnly";
   
       set({ authUser: null });
       toast.success("Logged out successfully");
