@@ -52,4 +52,5 @@ export const setCookies = (res, tokens) => {
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
     path: '/',
   });
+  console.log("Cookies set successfully:", { accessToken, refreshToken, csrfToken, sessionId });
 };
