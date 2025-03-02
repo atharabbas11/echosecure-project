@@ -68,6 +68,7 @@ axiosInstance.interceptors.response.use(
         }
       } catch (refreshError) {
         // If refresh fails, log the user out
+        console.error("Token refresh failed:", refreshError);
         useAuthStore.getState().logout();
         return Promise.reject(refreshError);
       }
