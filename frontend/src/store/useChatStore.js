@@ -294,9 +294,11 @@ export const useChatStore = create((set, get) => ({
   
     try {
       const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { "Content-Type": "multipart/form-data",
+          "x-csrf-token": await getCSRFTokenWithRetry(), // Add CSRF token
+         },
       });
-  
+      console.log("Request Headers:", res.config.headers); // Debugging line
       const newMessage = res.data;
   
       // Decrypt the message for the sender before updating state
