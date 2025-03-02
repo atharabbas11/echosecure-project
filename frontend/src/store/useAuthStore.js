@@ -3,14 +3,8 @@ import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
-// Debugging: Log the environment variable
-// console.log("VITE_SOCKET_API_BASE_URL:", import.meta.env.VITE_SOCKET_API_BASE_URL);
 
-const localIP = import.meta.env.VITE_SOCKET_API_BASE_URL; // Replace with your actual local IP
-const BASE_URL = import.meta.env.MODE === "development" ? `${localIP}` : "/";
-
-// Debugging: Log the BASE_URL
-// console.log("BASE_URL:", BASE_URL);
+const BASE_URL =  import.meta.env.VITE_SOCKET_API_BASE_URL;
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
