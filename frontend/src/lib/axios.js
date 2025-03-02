@@ -40,6 +40,7 @@ axiosInstance.interceptors.request.use(async (config) => {
   const csrfToken = await getCSRFTokenWithRetry();
 
   if (csrfToken) {
+    console.log('Attaching CSRF Token to headers:', csrfToken);
     config.headers['x-csrf-token'] = csrfToken;
   } else {
     console.error('CSRF token not found in cookies');
