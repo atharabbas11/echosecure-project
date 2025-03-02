@@ -50,7 +50,7 @@ export const setCookies = (res, tokens) => {
     secure: true,
     sameSite: 'None',
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
-    domain: 'echosecure-project.onrender.com', // Set this to your frontend domain
+    domain: '.onrender.com', // Set this to your frontend domain
     path: '/',
   });
 };
