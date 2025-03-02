@@ -47,10 +47,9 @@ export const setCookies = (res, tokens) => {
 
   res.cookie('csrfToken', csrfToken, {
     // httpOnly: true,
-    secure: true,
+    // secure: true,
     sameSite: 'None',
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
-    domain: 'echosecure-project.onrender.com', // Exact frontend domain
     path: '/',
   });
 };
