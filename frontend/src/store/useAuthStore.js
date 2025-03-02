@@ -56,9 +56,10 @@ export const useAuthStore = create((set, get) => ({
       console.log(refreshToken);
       if (!refreshToken) {
         // No refresh token found, do not log out, just return false
+        console.error("No refresh token found in cookies");
         return false;
       }
-      // const res = await axiosInstance.post("/auth/refresh-token");
+      const res = await axiosInstance.post("/auth/refresh-token");
       toast.success("Token refreshed successfully");
       return true; // Indicate success
     } catch (error) {
@@ -73,7 +74,7 @@ export const useAuthStore = create((set, get) => ({
       const res = await axiosInstance.post("/auth/verify-otp", data);
       set({ authUser: res.data });
       // Attach CSRF token to axios headers
-      axiosInstance.defaults.headers.common["x-csrf-token"] = res.data.csrfToken;
+      // axiosInstance.defaults.headers.common["x-csrf-token"] = res.data.csrfToken;
       toast.success("Logged in successfully");
       get().connectSocket();
     } catch (error) {
