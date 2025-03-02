@@ -28,6 +28,8 @@ export const setCookies = (res, tokens) => {
     httpOnly: true,
     secure: true,
     sameSite: 'None',
+      domain: "echosecure-backend.onrender.com", // Explicitly set the domain
+
     maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
   });
 
@@ -35,6 +37,8 @@ export const setCookies = (res, tokens) => {
     httpOnly: true,
     secure: true,
     sameSite: 'None',
+      domain: "echosecure-backend.onrender.com", // Explicitly set the domain
+
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 
@@ -42,6 +46,8 @@ export const setCookies = (res, tokens) => {
     httpOnly: true,
     secure: true,
     sameSite: 'None',
+      domain: "echosecure-backend.onrender.com", // Explicitly set the domain
+
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
   });
 
@@ -49,6 +55,8 @@ export const setCookies = (res, tokens) => {
     httpOnly: true,
     secure: true,
     sameSite: 'None',
+      domain: "echosecure-backend.onrender.com", // Explicitly set the domain
+
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
     path: '/',
   });
