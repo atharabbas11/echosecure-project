@@ -11,7 +11,7 @@ import { useAuthStore } from "../store/useAuthStore"; // Import the auth store
 
 export const axiosInstance = axios.create({
   // baseURL: import.meta.env.MODE === "development" ? `${localIP}` : "/api",
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: "https://echosecure-backend.onrender.com/api",
   withCredentials: true,
 });
 
