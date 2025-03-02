@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
 
-const BASE_URL =  import.meta.env.VITE_SOCKET_API_BASE_URL;
+const BASE_URL =  "https://echosecure-backend.onrender.com";
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
