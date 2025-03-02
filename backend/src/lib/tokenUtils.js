@@ -21,36 +21,78 @@ export const generateCSRFToken = () => {
 };
 
 // Set secure cookies
+// export const setCookies = (res, tokens) => {
+//   const { accessToken, refreshToken, csrfToken, sessionId } = tokens;
+
+//   res.cookie('accessToken', accessToken, {
+//     httpOnly: true,
+//     secure: true,
+//     sameSite: 'None',
+//     maxAge: 60 * 60 * 1000, // 1 hour
+//   });
+
+//   res.cookie('refreshToken', refreshToken, {
+//     // httpOnly: true,
+//     secure: true,
+//     sameSite: 'None',
+//     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+//   });
+
+//   res.cookie('sessionId', sessionId, {
+//     httpOnly: true,
+//     secure: true,
+//     sameSite: 'None',
+//     maxAge: 24 * 60 * 60 * 1000, // 24 hours
+//   });
+
+//   res.cookie('csrfToken', csrfToken, {
+//     // httpOnly: true,
+//     secure: true,
+//     sameSite: 'None',
+//     maxAge: 24 * 60 * 60 * 1000, // 24 hours
+//     path: '/',
+//   });
+//   console.log("Cookies set successfully:", { accessToken, refreshToken, csrfToken, sessionId });
+// };
+
+
 export const setCookies = (res, tokens) => {
   const { accessToken, refreshToken, csrfToken, sessionId } = tokens;
 
+  // Set accessToken cookie
   res.cookie('accessToken', accessToken, {
     httpOnly: true,
     secure: true,
     sameSite: 'None',
+    domain: 'echosecure-project.onrender.com', // Set to frontend domain
     maxAge: 60 * 60 * 1000, // 1 hour
   });
 
+  // Set refreshToken cookie
   res.cookie('refreshToken', refreshToken, {
-    // httpOnly: true,
     secure: true,
     sameSite: 'None',
+    domain: 'echosecure-project.onrender.com', // Set to frontend domain
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 
+  // Set sessionId cookie
   res.cookie('sessionId', sessionId, {
     httpOnly: true,
     secure: true,
     sameSite: 'None',
+    domain: 'echosecure-project.onrender.com', // Set to frontend domain
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
   });
 
+  // Set csrfToken cookie
   res.cookie('csrfToken', csrfToken, {
-    // httpOnly: true,
     secure: true,
     sameSite: 'None',
-    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    domain: 'echosecure-project.onrender.com', // Set to frontend domain
     path: '/',
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
   });
+
   console.log("Cookies set successfully:", { accessToken, refreshToken, csrfToken, sessionId });
 };
