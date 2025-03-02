@@ -23,6 +23,8 @@ const getCSRFTokenWithRetry = async () => {
       .split('; ')
       .find((row) => row.startsWith('csrfToken='))
       ?.split('=')[1];
+      console.log("CSRF Token from Cookie:", csrfToken);
+      console.log("All Cookies:", document.cookie);
       if (csrfToken) {
         console.log('CSRF Token found:', csrfToken);
         return csrfToken;
