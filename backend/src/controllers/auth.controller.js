@@ -135,56 +135,18 @@ export const refreshToken = async (req, res) => {
   }
 };
 
-// export const logout = (req, res) => {
-//   try {
-//     // Clear all cookies
-//     res.clearCookie("accessToken");
-//     res.clearCookie("refreshToken");
-//     res.clearCookie("sessionId");
-//     res.clearCookie("csrfToken");
-//     res.clearCookie("csrfTokenHeader");
-
-//     res.status(200).json({ message: "Logged out successfully" });
-//   } catch (error) {
-//     // console.log("Error in logout controller", error.message);
-//     res.status(500).json({ message: "Internal Server Error" });
-//   }
-// };
-
 export const logout = (req, res) => {
   try {
-    // Clear all cookies with the same options used when setting them
-    res.clearCookie("accessToken", {
-      path: "/",
-      domain: "echosecure-backend.onrender.com", // Match the domain
-      secure: true,
-      sameSite: "None",
-    });
-
-    res.clearCookie("refreshToken", {
-      path: "/",
-      domain: "echosecure-backend.onrender.com", // Match the domain
-      secure: true,
-      sameSite: "None",
-    });
-
-    res.clearCookie("sessionId", {
-      path: "/",
-      domain: "echosecure-backend.onrender.com", // Match the domain
-      secure: true,
-      sameSite: "None",
-    });
-
-    res.clearCookie("csrfToken", {
-      path: "/",
-      domain: "echosecure-backend.onrender.com", // Match the domain
-      secure: true,
-      sameSite: "None",
-    });
+    // Clear all cookies
+    res.clearCookie("accessToken");
+    res.clearCookie("refreshToken");
+    res.clearCookie("sessionId");
+    res.clearCookie("csrfToken");
+    res.clearCookie("csrfTokenHeader");
 
     res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
-    console.error("Error in logout controller:", error.message);
+    // console.log("Error in logout controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
