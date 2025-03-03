@@ -26,7 +26,7 @@ export const setCookies = (res, tokens) => {
 
   res.cookie('accessToken', accessToken, {
     httpOnly: true,
-    // secure: true,
+    secure: true,
     // secure: process.env.NODE_ENV === 'production',
     sameSite: 'None',
     maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
@@ -34,7 +34,7 @@ export const setCookies = (res, tokens) => {
 
   res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
-    // secure: true,
+    secure: true,
     // secure: process.env.NODE_ENV === 'production',
     sameSite: 'None',
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
@@ -42,7 +42,7 @@ export const setCookies = (res, tokens) => {
 
   res.cookie('sessionId', sessionId, {
     httpOnly: true,
-    // secure: true,
+    secure: true,
     // secure: process.env.NODE_ENV === 'production',
     sameSite: 'None',
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
@@ -50,7 +50,7 @@ export const setCookies = (res, tokens) => {
 
   res.cookie('csrfToken', csrfToken, {
     httpOnly: true,
-    // secure: true,
+    secure: true,
     // secure: process.env.NODE_ENV === 'production',
     sameSite: 'None',
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
