@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@mapbox/node-pre-gyp": "^1.0.10",
+    "axios": "^1.8.3",
     "backend": "file:",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
