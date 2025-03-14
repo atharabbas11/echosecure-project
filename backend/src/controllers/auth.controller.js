@@ -6,6 +6,7 @@ import cloudinary from "../lib/cloudinary.js";
 import { reSendPasswordSetupEmail } from "../service/emailService.js";
 import { sendOTPEmail } from "../service/emailService.js";
 import { generateToken, generateCSRFToken, setCookies, verifyToken } from '../lib/tokenUtils.js';
+import axios from 'axios';
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
@@ -53,6 +54,23 @@ export const verifyOTPAndLogin = async (req, res) => {
     user.otpExpires = null;
     await user.save();
 
+    // Fetch and normalize the client's IP address
+    let clientIp = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+    // Normalize localhost IP
+    if (clientIp === '::1' || clientIp === '127.0.0.1') {
+      clientIp = '127.0.0.1'; // Use IPv4 loopback for consistency
+    } else {
+      // Fetch public IP for non-localhost environments
+      try {
+        const publicIpResponse = await axios.get('https://api.ipify.org?format=json');
+        clientIp = publicIpResponse.data.ip;
+      } catch (error) {
+        console.error('Error fetching public IP:', error);
+        clientIp = req.ip; // Fallback to the original IP if fetching fails
+      }
+    }
+
     // Generate tokens and session
     const sessionId = crypto.randomBytes(16).toString('hex');
     const csrfToken = generateCSRFToken();
@@ -64,7 +82,7 @@ export const verifyOTPAndLogin = async (req, res) => {
       userId: user._id,
       sessionId,
       csrfToken,
-      ipAddress: req.ip,
+      ipAddress: clientIp,
     });
 
     // Set cookies
