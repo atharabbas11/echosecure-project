@@ -55,19 +55,23 @@ export const verifyOTPAndLogin = async (req, res) => {
     await user.save();
 
     // Fetch and normalize the client's IP address
-    let clientIp = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    let clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.ip;
 
     // Normalize localhost IP
     if (clientIp === '::1' || clientIp === '127.0.0.1') {
       clientIp = '127.0.0.1'; // Use IPv4 loopback for consistency
-    } else {
-      // Fetch public IP for non-localhost environments
+    } else if (clientIp && clientIp.includes(',')) {
+      // Handle cases where there are multiple IPs in the forwarded header (which is a comma-separated list)
+      clientIp = clientIp.split(',')[0].trim();
+    }
+
+    // If no IP, attempt to get the public IP address (if needed)
+    if (!clientIp) {
       try {
         const publicIpResponse = await axios.get('https://api.ipify.org?format=json');
         clientIp = publicIpResponse.data.ip;
       } catch (error) {
         console.error('Error fetching public IP:', error);
-        clientIp = req.ip; // Fallback to the original IP if fetching fails
       }
     }
 
@@ -96,6 +100,7 @@ export const verifyOTPAndLogin = async (req, res) => {
       profilePic: user.profilePic,
     });
   } catch (error) {
+    console.error('Error in OTP verification and login:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
