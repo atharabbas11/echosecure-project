@@ -25,7 +25,7 @@ export const login = async (req, res) => {
     // Generate and send OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit OTP
     await user.encryptOTP(otp); // Encrypt and store OTP
-    await sendOTPEmail(email, otp); // Send OTP via email
+    await sendOTPEmail(email, fullName, otp); // Send OTP via email
 
     res.status(200).json({ success: true, message: "OTP sent to your email" });
   } catch (error) {
@@ -299,7 +299,7 @@ export const resendPasswordSetupLink = async (req, res) => {
 
     // Send the new password setup link via email
     const passwordSetupLink = `${process.env.CLIENT_URL}/set-password?token=${newToken}`;
-    await reSendPasswordSetupEmail(user.email, passwordSetupLink);
+    await reSendPasswordSetupEmail(user.email, user.fullName, passwordSetupLink);
 
     res.status(200).json({ message: 'A new password setup link has been sent to your email.' });
   } catch (error) {
