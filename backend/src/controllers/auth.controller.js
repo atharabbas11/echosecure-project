@@ -25,6 +25,7 @@ export const login = async (req, res) => {
     // Generate and send OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit OTP
     await user.encryptOTP(otp); // Encrypt and store OTP
+    const fullName = user.fullName; 
     await sendOTPEmail(email, fullName, otp); // Send OTP via email
 
     res.status(200).json({ success: true, message: "OTP sent to your email" });
