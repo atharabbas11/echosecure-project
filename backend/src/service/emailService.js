@@ -33,11 +33,13 @@ export const reSendPasswordSetupEmail = async (email, fullName, link) => {
               <p style="font-size: 16px; color: #333;">Dear ${fullName},</p>
               <p style="font-size: 16px; color: #333;">Please click the link below to reset your password:</p>
               
-              <div style="margin: 20px 0;">
-                <span style="display: inline-block; overflow-hidden; font-size: 13px; font-weight: bold; background: #f5f5f5; padding: 10px 20px; border-radius: 5px; border: 1px solid #ccc;">
-                  <a href=${link} style="text-decoration: none; color: #007bff;">Reset Password Link</a>
-                </span>
-              </div>
+             <table role="presentation" cellpadding="0" cellspacing="0" style="width: auto; border: 0; border-radius: 5px; background: #f5f5f5; padding: 10px 20px; text-align: center; font-size: 13px; font-weight: bold;">
+                <tr>
+                    <td style="border: 1px solid #ccc; border-radius: 5px; background: #f5f5f5;">
+                      <a href="${link}" style="text-decoration: none; color: #007bff; display: inline-block; padding: 10px 20px; border-radius: 5px; background-color: #f5f5f5; border: 1px solid #ccc;">Set Password Link</a>
+                    </td>
+                  </tr>
+            </table>
                     
               <p style="font-size: 16px; color: #333;">This link is valid for <strong>24 Hrs</strong>. Do not share it with anyone.</p>
               <p style="font-size: 16px; color: #333;">If you did not request this, please ignore this email or contact support.</p>
