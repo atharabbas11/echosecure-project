@@ -6,6 +6,9 @@ const ProfilePage = () => {
   const { authUser, isUpdatingProfile, updateProfile } = useAuthStore();
   const [selectedImg, setSelectedImg] = useState(null);
 
+  const deleteAccountDate = new Date(authUser.deleteAccount);
+  const delFormattedDate = deleteAccountDate.toLocaleString(); 
+
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -92,7 +95,10 @@ const ProfilePage = () => {
               </div>
               <div className="flex items-center justify-between py-2">
                 <span>Account Status</span>
-                <span className="text-green-500">Active</span>
+                <div className="flex gap-10">
+                  <span className="text-green-500">{authUser.status}</span>
+                  <span className="text-red-500">{delFormattedDate}</span>
+                </div>
               </div>
             </div>
           </div>
