@@ -29,7 +29,7 @@ export const setCookies = (res, tokens) => {
     secure: true,
     // secure: process.env.NODE_ENV === 'production',
     sameSite: 'None',
-    maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
+    maxAge: 12 * 60 * 60 * 1000, // 12 hours
   });
 
   res.cookie('refreshToken', refreshToken, {
